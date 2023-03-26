@@ -1,0 +1,6 @@
+.idea
+.env
+private_key.pem
+public_key.pem
+get/letter.txt
+send/signature.txt

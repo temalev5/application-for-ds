@@ -1,5 +1,6 @@
 import base64
 import email
+import os
 from email.header import decode_header
 from imaplib import IMAP4_SSL
 from cryptography.exceptions import InvalidSignature
@@ -7,6 +8,9 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.asymmetric.padding import PSS
+
+from dotenv import load_dotenv
+load_dotenv('../.env')
 
 
 # Получение модели публичного ключа из файла
@@ -78,10 +82,10 @@ def verify_signature(_signature, _file_data, _public_key_path):
 
 
 if __name__ == '__main__':
-    imap_server = "imap.yandex.com"
-    imap_username = "antkonst016@yandex.ru"
-    imap_password = ""
-    public_key_path = "../public_key.pem"
+    imap_server = os.getenv("imap_server")
+    imap_username = os.getenv("imap_username")
+    imap_password = os.getenv("imap_password")
+    public_key_path = os.getenv("public_key_path")
 
     signature, file_data = get_email_text_and_file(
         imap_server,

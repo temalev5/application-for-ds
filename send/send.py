@@ -10,6 +10,9 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives.asymmetric.padding import PSS
 
+from dotenv import load_dotenv
+load_dotenv('../.env')
+
 
 # Отправка письма с прикрепленным файлом
 def send_email(_sender_email, _sender_password, _receiver_email, _subject, _attachment_path, _signature):
@@ -104,15 +107,15 @@ def generate_keypair(_private_key_path, _public_key_path):
 
 
 if __name__ == '__main__':
-    private_key_path = "../private_key.pem"
-    public_key_path = "../public_key.pem"
-    letter_file_path = "letter.txt"
-    signature_file_path = "signature.txt"
+    private_key_path = os.getenv("private_key_path")
+    public_key_path = os.getenv("public_key_path")
+    letter_file_path = os.getenv("letter_file_path")
+    signature_file_path = os.getenv("signature_file_path")
 
-    sender_email = "artyom.leva@yandex.ru"
-    sender_password = ""
-    receiver_email = "antkonst016@yandex.ru"
-    subject = "Test"
+    sender_email = os.getenv("sender_email")
+    sender_password = os.getenv("sender_password")
+    receiver_email = os.getenv("receiver_email")
+    subject = os.getenv("subject")
 
     private_key_modal, public_key_modal = generate_keypair(private_key_path, public_key_path)
 
